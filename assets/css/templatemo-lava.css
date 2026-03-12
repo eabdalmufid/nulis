@@ -608,7 +608,6 @@ button.main-button:hover {
 }
 
 .contact-form ::-webkit-input-placeholder { color: var(--text-muted); }
-.contact-form :-ms-input-placeholder { color: var(--text-muted); }
 .contact-form ::placeholder { color: var(--text-muted); }
 
 /* Preview label */
