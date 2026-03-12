@@ -6,7 +6,7 @@ Generator tulisan tangan digital — ketik teks kamu, pilih font, dan download h
 
 **[eabdalmufid.github.io/nulis](https://eabdalmufid.github.io/nulis)**
 
-![screencapture](https://user-images.githubusercontent.com/76531998/204364654-5eb9982d-2573-43c4-9033-7d615de18c98.png)
+![screencapture](https://github.com/user-attachments/assets/e92af90c-4f5e-471c-a9ac-0390155455ff)
 
 ## ⚡ Fitur
 
