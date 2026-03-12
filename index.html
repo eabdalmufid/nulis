@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+    <meta name="description" content="Bot Nulis - Website nulis otomatis untuk menghasilkan tulisan tangan digital">
     <meta name="author" content="Bot Nulis">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <title>Bot Nulis by Afidev</title>
@@ -20,6 +21,28 @@
       @media only screen and (max-width: 1140px) {
         .welcome-area {
           margin-bottom: 50px;
+        }
+      }
+
+      /* Responsive canvas */
+      .paper-container canvas {
+        max-width: 100%;
+        height: auto !important;
+      }
+
+      @media (max-width: 767px) {
+        .paper-container {
+          margin-top: 30px;
+          text-align: center;
+        }
+        .contact-form {
+          padding: 20px !important;
+        }
+        .contact-form .card-body {
+          padding: 0;
+        }
+        .section {
+          padding: 30px 0;
         }
       }
     </style>
@@ -40,7 +63,7 @@
                   <a href="#welcome" class="menu-item">Home</a>
                 </li>
                 <li class="scroll-to-section">
-                  <a href="#Bot Nulis" class="menu-item active">Bot Nulis</a>
+                  <a href="#bot-nulis" class="menu-item active">Bot Nulis</a>
                 </li>
                 <li class="scroll-to-section">
                   <a href="#contact-us" class="menu-item">Contact Me</a>
@@ -63,9 +86,9 @@
         <div class="container">
           <div class="row">
             <div class="left-text col-lg-6 col-md-12 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s" data-scroll-reveal-id="1" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-              <h1>Bot Nulis <em>.</em>
-              </h1> Mager mau nulis offline? <br />mending pakai Bot Nulis <br />Bot Nulis merupakan website nulis otomatis bagi kalian yg mager nulis dikertas, ketahuan dosen tanggung sendiri akibatnya </p>
-              <a href="#Bot Nulis" class="main-button-slider">Start</a>
+              <h1>Bot Nulis <em>.</em></h1>
+              <p>Malas menulis tugas dengan tangan? Gunakan Bot Nulis! Bot Nulis adalah website yang membantu kamu membuat tulisan tangan digital secara otomatis. Cukup ketik, pilih font, dan download hasilnya.</p>
+              <a href="#bot-nulis" class="main-button-slider">Mulai</a>
             </div>
           </div>
         </div>
@@ -109,7 +132,8 @@
 
       function setup() {
         // ukuran asli gambar 300x441
-        createCanvas(300 * 2, 447 * 2);
+        let canvas = createCanvas(300 * 2, 447 * 2);
+        canvas.parent('canvas-container');
         bg = loadImage('./img/folio.jpg');
         font = loadFont('./fonts/' + getFontIndex().file);
         textFont(font);
@@ -117,7 +141,6 @@
       }
 
       function draw() {
-        // fix_dpi();
         background(bg);
         margin = 20;
         fill(0, 0, 0, 200);
@@ -125,7 +148,7 @@
         text(txtName, 0, 0);
         text(txtDate, 450, 0);
         translate(0, margin + 7);
-        text(txtContent, 0, 0, 580 /*, 800 */ );
+        text(txtContent, 0, 0, 580);
       }
       document.addEventListener('DOMContentLoaded', (e) => {
         let fontSelectEl = document.getElementById('font');
@@ -142,16 +165,10 @@
     </script>
     <script>
       function downloadCanvas(c, filename) {
-        /// create an "off-screen" anchor tag
         var lnk = document.createElement('a'),
           e;
-        /// the key here is to set the download attribute of the a tag
         lnk.download = filename;
-        /// convert canvas content to data-uri for link. When download
-        /// attribute is set the content pointed to by link will be
-        /// pushed as "download" in HTML5 capable browsers
         lnk.href = c.toDataURL();
-        /// create a "fake" click-event to trigger the download
         if (document.createEvent) {
           e = document.createEvent("MouseEvents");
           e.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -177,14 +194,13 @@
       }
     </script>
     <!-- ***** Features Big Item Start ***** -->
-    <section class="section" id="Bot Nulis">
+    <section class="section" id="bot-nulis">
       <div class="container">
         <div class="row">
           <!-- ***** Contact Form Start ***** -->
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="contact-form">
               <div class="card-body">
-                <div class="form-group"></div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="font">Pilih Font:</label>
@@ -202,7 +218,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="comment">Isi Materi:</label>
+                  <label for="content">Isi Materi:</label>
                   <textarea class="form-control" id="content" rows="10" oninput="txtContent = this.value"></textarea>
                 </div>
               </div>
@@ -211,42 +227,53 @@
               </div>
             </div>
           </div>
+          <!-- ***** Contact Form End ***** -->
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <main class="paper-container"></main>
+            <div class="paper-container" id="canvas-container"></div>
           </div>
+        </div>
+      </div>
     </section>
     <!-- ***** Features Big Item End ***** -->
     <!-- ***** Footer Start ***** -->
     <footer id="contact-us">
       <div class="container">
         <div class="footer-content">
-          <div class="row" <div class="row">
+          <div class="row">
             <div class="col-lg-12">
               <div class="sub-footer">
-                <p class="love">All Rights Reserved. &copy; 2022 <a href="#">Bot Nulis</a> Design : Abdul Mufid <br />
-                <p class="love">Connect with me <br />
+                <p class="love">All Rights Reserved. &copy; 2025 <a href="#">Bot Nulis</a> Design : Abdul Mufid</p>
+                <p class="love">Connect with me</p>
                 <p align="center">
-                  <a href="https://twitter.com/eabdalmufid" target="blank">
-                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="ahmadghozalixd" height="30" width="40" />
+                  <a href="https://twitter.com/eabdalmufid" target="_blank" rel="noopener noreferrer">
+                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="Twitter" height="30" width="40" />
                   </a>
-                  <a href="https://linkedin.com/in/eabdalmufid" target="blank">
-                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="ahmadghozali.xyz" height="30" width="40" />
+                  <a href="https://linkedin.com/in/eabdalmufid" target="_blank" rel="noopener noreferrer">
+                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="LinkedIn" height="30" width="40" />
                   </a>
-                  <a href="https://instagram.com/eabdlmufid" target="blank">
-                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="ahmadghozali.xyz" height="30" width="40" />
+                  <a href="https://instagram.com/eabdlmufid" target="_blank" rel="noopener noreferrer">
+                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="Instagram" height="30" width="40" />
                   </a>
-                  <!-- jQuery -->
-                  <script src="assets/js/jquery-2.1.0.min.js"></script>
-                  <!-- Bootstrap -->
-                  <script src="assets/js/popper.js"></script>
-                  <script src="assets/js/bootstrap.min.js"></script>
-                  <!-- Plugins -->
-                  <script src="assets/js/owl-carousel.js"></script>
-                  <script src="assets/js/scrollreveal.min.js"></script>
-                  <script src="assets/js/waypoints.min.js"></script>
-                  <script src="assets/js/jquery.counterup.min.js"></script>
-                  <script src="assets/js/imgfix.min.js"></script>
-                  <!-- Global Init -->
-                  <script src="assets/js/custom.js"></script>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ***** Footer End ***** -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Plugins -->
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script>
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
   </body>
 </html>
